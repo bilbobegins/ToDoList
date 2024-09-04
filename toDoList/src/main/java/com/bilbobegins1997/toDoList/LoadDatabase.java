@@ -1,4 +1,4 @@
-package com.bilbobegins1997.toDoList.Model;
+package com.bilbobegins1997.toDoList;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

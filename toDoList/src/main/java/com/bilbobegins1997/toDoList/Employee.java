@@ -1,4 +1,4 @@
-package com.bilbobegins1997.toDoList.Model;
+package com.bilbobegins1997.toDoList;
 
 import java.util.Objects;
 
@@ -8,7 +8,7 @@ import jakarta.persistence.Id;
 
 
 @Entity
-class Employee {
+ class Employee {
 
     private @Id
     @GeneratedValue Long id;
