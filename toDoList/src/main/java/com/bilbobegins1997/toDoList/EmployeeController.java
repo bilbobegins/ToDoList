@@ -20,6 +20,11 @@ class EmployeeController {
     private final EmployeeRepository repository;
     private final EmployeeModelAssembler assembler;
 
+    @GetMapping("/")
+    public String chatroom() {
+        return "Welcome to the Chatroom!";
+    }
+
     EmployeeController(EmployeeRepository repository, EmployeeModelAssembler assembler) {
         this.repository = repository;
         this.assembler = assembler;
