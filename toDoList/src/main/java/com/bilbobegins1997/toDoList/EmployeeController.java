@@ -22,7 +22,7 @@ class EmployeeController {
 
     @GetMapping("/")
     public String chatroom() {
-        return "Welcome to the !";
+        return "Welcome to the chatroom !";
     }
 
     EmployeeController(EmployeeRepository repository, EmployeeModelAssembler assembler) {
@@ -67,9 +67,7 @@ class EmployeeController {
                     employee.setRole(newEmployee.getRole());
                     return repository.save(employee);
                 })
-                .orElseGet(() -> {
-                    return repository.save(newEmployee);
-                });
+                .orElseGet(() -> repository.save(newEmployee));
     }
 
     @DeleteMapping("/employees/{id}")
