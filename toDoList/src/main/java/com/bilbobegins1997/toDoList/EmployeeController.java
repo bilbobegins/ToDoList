@@ -22,7 +22,7 @@ class EmployeeController {
 
     @GetMapping("/")
     public String chatroom() {
-        return "Welcome to the Chatroom!";
+        return "Welcome to the !";
     }
 
     EmployeeController(EmployeeRepository repository, EmployeeModelAssembler assembler) {
