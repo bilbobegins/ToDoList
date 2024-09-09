@@ -4,9 +4,9 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 @RestControllerAdvice
-public class TypeNotFoundAdvice {
+public class TaskNotFoundAdvice {
     @ResponseStatus(HttpStatus.NOT_FOUND)
-    String employeeNotFoundHandler(TypeNotFoundException ex) {
+    String employeeNotFoundHandler(TaskNotFoundException ex) {
         return ex.getMessage();
     }
 

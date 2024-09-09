@@ -8,19 +8,19 @@ import jakarta.persistence.Id;
 
 
 @Entity
- class Type {
+ class Task {
 
     private @Id
     @GeneratedValue Long id;
     private String name;
-    private String type;
+    private String task;
 
-  public Type() {}
+  public Task() {}
 
-    Type(String name, String type) {
+    Task(String name, String type) {
 
         this.name = name;
-        this.type = type;
+        this.task = type;
     }
 
     public Long getId() {
@@ -31,8 +31,8 @@ import jakarta.persistence.Id;
         return this.name;
     }
 
-    public String getType() {
-        return this.type;
+    public String getTask() {
+        return this.task;
     }
 
     public void setId(Long id) {
@@ -43,28 +43,28 @@ import jakarta.persistence.Id;
         this.name = name;
     }
 
-    public void setType(String role) {
-        this.type = role;
+    public void setTask(String role) {
+        this.task = role;
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Type type1)) return false;
-        return Objects.equals(getId(), type1.getId()) && Objects.equals(getName(), type1.getName()) && Objects.equals(getType(), type1.getType());
+        if (!(o instanceof Task task1)) return false;
+        return Objects.equals(getId(), task1.getId()) && Objects.equals(getName(), task1.getName()) && Objects.equals(getTask(), task1.getTask());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId(), getName(), getType());
+        return Objects.hash(getId(), getName(), getTask());
     }
 
     @Override
     public String toString() {
-        return "Type{" +
+        return "Task{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", type='" + type + '\'' +
+                ", task='" + task + '\'' +
                 '}';
     }
 }

@@ -7,13 +7,13 @@ import org.springframework.hateoas.server.RepresentationModelAssembler;
 import org.springframework.stereotype.Component;
 
 @Component
-class TypeModelAssembler implements RepresentationModelAssembler<Type, EntityModel<Type>> {
+class TaskModelAssembler implements RepresentationModelAssembler<Task, EntityModel<Task>> {
 
     @Override
-    public EntityModel<Type> toModel(Type employee) {
+    public EntityModel<Task> toModel(Task employee) {
 
         return EntityModel.of(employee, //
-                linkTo(methodOn(TypeController.class).one(employee.getId())).withSelfRel(),
-                linkTo(methodOn(TypeController.class).all()).withRel("employees"));
+                linkTo(methodOn(TaskController.class).one(employee.getId())).withSelfRel(),
+                linkTo(methodOn(TaskController.class).all()).withRel("employees"));
     }
 }

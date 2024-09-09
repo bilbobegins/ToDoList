@@ -15,42 +15,42 @@ import org.springframework.hateoas.EntityModel;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.*;
 
 @RestController
-class TypeController {
+class TaskController {
 
-    private final EmployeeRepository repository;
-    private final TypeModelAssembler assembler;
+    private final TaskRepository repository;
+    private final TaskModelAssembler assembler;
 
     @GetMapping("/")
     public String chatroom() {
         return "Welcome to the chatroom !";
     }
 
-    TypeController(EmployeeRepository repository, TypeModelAssembler assembler) {
+    TaskController(TaskRepository repository, TaskModelAssembler assembler) {
         this.repository = repository;
         this.assembler = assembler;
     }
 
-    @GetMapping("/todo/list/type")
-    CollectionModel<EntityModel<Type>> all() {
-        List<EntityModel<Type>> employees = repository.findAll().stream() //
+    @GetMapping("/todo/list/task")
+    CollectionModel<EntityModel<Task>> all() {
+        List<EntityModel<Task>> employees = repository.findAll().stream() //
                 .map(assembler::toModel) //
                 .collect(Collectors.toList());
 
-        return CollectionModel.of(employees, linkTo(methodOn(TypeController.class).all()).withSelfRel());
+        return CollectionModel.of(employees, linkTo(methodOn(TaskController.class).all()).withSelfRel());
 
     }
 
 
-    @PostMapping("/todo/list/type")
-    Type newEmployee(@RequestBody Type newEmployee) {
+    @PostMapping("/todo/list/task")
+    Task newEmployee(@RequestBody Task newEmployee) {
         return repository.save(newEmployee);
     }
 
     // Single item
-    @GetMapping("/todo/list/type/{id}")
-    EntityModel<Type> one(@PathVariable Long id) {
-        Type employee = repository.findById(id) //
-                .orElseThrow(() -> new TypeNotFoundException(id));
+    @GetMapping("/todo/list/task/{id}")
+    EntityModel<Task> one(@PathVariable Long id) {
+        Task employee = repository.findById(id) //
+                .orElseThrow(() -> new TaskNotFoundException(id));
 
         return assembler.toModel(employee);
 
@@ -58,19 +58,19 @@ class TypeController {
 
 
 
-    @PutMapping("/todo/list/type/{id}")
-    Type replaceEmployee(@RequestBody Type newEmployee, @PathVariable Long id) {
+    @PutMapping("/todo/list/task/{id}")
+    Task replaceEmployee(@RequestBody Task newEmployee, @PathVariable Long id) {
 
         return repository.findById(id)
                 .map(employee -> {
                     employee.setName(newEmployee.getName());
-                    employee.setType(newEmployee.getType());
+                    employee.setTask(newEmployee.getTask());
                     return repository.save(employee);
                 })
                 .orElseGet(() -> repository.save(newEmployee));
     }
 
-    @DeleteMapping("/todo/list/type/{id}")
+    @DeleteMapping("/todo/list/task/{id}")
     void deleteEmployee(@PathVariable Long id) {
         repository.deleteById(id);
     }
