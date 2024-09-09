@@ -30,7 +30,7 @@ class EmployeeController {
         this.assembler = assembler;
     }
 
-    @GetMapping("/employees")
+    @GetMapping("/todo/list/type")
     CollectionModel<EntityModel<Employee>> all() {
         List<EntityModel<Employee>> employees = repository.findAll().stream() //
                 .map(assembler::toModel) //
@@ -41,13 +41,13 @@ class EmployeeController {
     }
 
 
-    @PostMapping("/employees")
+    @PostMapping("/todo/list/type")
     Employee newEmployee(@RequestBody Employee newEmployee) {
         return repository.save(newEmployee);
     }
 
     // Single item
-    @GetMapping("/employees/{id}")
+    @GetMapping("/todo/list/type/{id}")
     EntityModel<Employee> one(@PathVariable Long id) {
         Employee employee = repository.findById(id) //
                 .orElseThrow(() -> new EmployeeNotFoundException(id));
@@ -58,7 +58,7 @@ class EmployeeController {
 
 
 
-    @PutMapping("/employees/{id}")
+    @PutMapping("/todo/list/type/{id}")
     Employee replaceEmployee(@RequestBody Employee newEmployee, @PathVariable Long id) {
 
         return repository.findById(id)
@@ -70,7 +70,7 @@ class EmployeeController {
                 .orElseGet(() -> repository.save(newEmployee));
     }
 
-    @DeleteMapping("/employees/{id}")
+    @DeleteMapping("/todo/list/type/{id}")
     void deleteEmployee(@PathVariable Long id) {
         repository.deleteById(id);
     }

@@ -13,14 +13,14 @@ import jakarta.persistence.Id;
     private @Id
     @GeneratedValue Long id;
     private String name;
-    private String role;
+    private String type;
 
   public Employee() {}
 
-    Employee(String name, String role) {
+    Employee(String name, String type) {
 
         this.name = name;
-        this.role = role;
+        this.type = type;
     }
 
     public Long getId() {
@@ -32,7 +32,7 @@ import jakarta.persistence.Id;
     }
 
     public String getRole() {
-        return this.role;
+        return this.type;
     }
 
     public void setId(Long id) {
@@ -44,7 +44,7 @@ import jakarta.persistence.Id;
     }
 
     public void setRole(String role) {
-        this.role = role;
+        this.type = role;
     }
 
     @Override
@@ -56,16 +56,16 @@ import jakarta.persistence.Id;
             return false;
         Employee employee = (Employee) o;
         return Objects.equals(this.id, employee.id) && Objects.equals(this.name, employee.name)
-                && Objects.equals(this.role, employee.role);
+                && Objects.equals(this.type, employee.type);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(this.id, this.name, this.role);
+        return Objects.hash(this.id, this.name, this.type);
     }
 
     @Override
     public String toString() {
-        return "Employee{" + "id=" + this.id + ", name='" + this.name + '\'' + ", role='" + this.role + '\'' + '}';
+        return "Employee{" + "id=" + this.id + ", name='" + this.name + '\'' + ", role='" + this.type + '\'' + '}';
     }
 }
