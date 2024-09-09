@@ -8,16 +8,16 @@ import jakarta.persistence.Id;
 
 
 @Entity
- class Employee {
+ class Type {
 
     private @Id
     @GeneratedValue Long id;
     private String name;
     private String type;
 
-  public Employee() {}
+  public Type() {}
 
-    Employee(String name, String type) {
+    Type(String name, String type) {
 
         this.name = name;
         this.type = type;
@@ -31,7 +31,7 @@ import jakarta.persistence.Id;
         return this.name;
     }
 
-    public String getRole() {
+    public String getType() {
         return this.type;
     }
 
@@ -43,29 +43,28 @@ import jakarta.persistence.Id;
         this.name = name;
     }
 
-    public void setRole(String role) {
+    public void setType(String role) {
         this.type = role;
     }
 
     @Override
     public boolean equals(Object o) {
-
-        if (this == o)
-            return true;
-        if (!(o instanceof Employee))
-            return false;
-        Employee employee = (Employee) o;
-        return Objects.equals(this.id, employee.id) && Objects.equals(this.name, employee.name)
-                && Objects.equals(this.type, employee.type);
+        if (this == o) return true;
+        if (!(o instanceof Type type1)) return false;
+        return Objects.equals(getId(), type1.getId()) && Objects.equals(getName(), type1.getName()) && Objects.equals(getType(), type1.getType());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(this.id, this.name, this.type);
+        return Objects.hash(getId(), getName(), getType());
     }
 
     @Override
     public String toString() {
-        return "Employee{" + "id=" + this.id + ", name='" + this.name + '\'' + ", role='" + this.type + '\'' + '}';
+        return "Type{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", type='" + type + '\'' +
+                '}';
     }
 }

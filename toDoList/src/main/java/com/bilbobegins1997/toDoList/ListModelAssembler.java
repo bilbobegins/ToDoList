@@ -14,7 +14,7 @@ public class ListModelAssembler implements RepresentationModelAssembler<ToDoList
     public EntityModel<ToDoList> toModel(ToDoList list) {
 
         return EntityModel.of(list, //
-                linkTo(methodOn(EmployeeController.class).one(list.getId())).withSelfRel(),
-                linkTo(methodOn(EmployeeController.class).all()).withRel("list"));
+                linkTo(methodOn(TypeController.class).one(list.getId())).withSelfRel(),
+                linkTo(methodOn(TypeController.class).all()).withRel("list"));
     }
 }

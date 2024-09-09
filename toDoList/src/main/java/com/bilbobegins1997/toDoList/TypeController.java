@@ -15,42 +15,42 @@ import org.springframework.hateoas.EntityModel;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.*;
 
 @RestController
-class EmployeeController {
+class TypeController {
 
     private final EmployeeRepository repository;
-    private final EmployeeModelAssembler assembler;
+    private final TypeModelAssembler assembler;
 
     @GetMapping("/")
     public String chatroom() {
         return "Welcome to the chatroom !";
     }
 
-    EmployeeController(EmployeeRepository repository, EmployeeModelAssembler assembler) {
+    TypeController(EmployeeRepository repository, TypeModelAssembler assembler) {
         this.repository = repository;
         this.assembler = assembler;
     }
 
     @GetMapping("/todo/list/type")
-    CollectionModel<EntityModel<Employee>> all() {
-        List<EntityModel<Employee>> employees = repository.findAll().stream() //
+    CollectionModel<EntityModel<Type>> all() {
+        List<EntityModel<Type>> employees = repository.findAll().stream() //
                 .map(assembler::toModel) //
                 .collect(Collectors.toList());
 
-        return CollectionModel.of(employees, linkTo(methodOn(EmployeeController.class).all()).withSelfRel());
+        return CollectionModel.of(employees, linkTo(methodOn(TypeController.class).all()).withSelfRel());
 
     }
 
 
     @PostMapping("/todo/list/type")
-    Employee newEmployee(@RequestBody Employee newEmployee) {
+    Type newEmployee(@RequestBody Type newEmployee) {
         return repository.save(newEmployee);
     }
 
     // Single item
     @GetMapping("/todo/list/type/{id}")
-    EntityModel<Employee> one(@PathVariable Long id) {
-        Employee employee = repository.findById(id) //
-                .orElseThrow(() -> new EmployeeNotFoundException(id));
+    EntityModel<Type> one(@PathVariable Long id) {
+        Type employee = repository.findById(id) //
+                .orElseThrow(() -> new TypeNotFoundException(id));
 
         return assembler.toModel(employee);
 
@@ -59,12 +59,12 @@ class EmployeeController {
 
 
     @PutMapping("/todo/list/type/{id}")
-    Employee replaceEmployee(@RequestBody Employee newEmployee, @PathVariable Long id) {
+    Type replaceEmployee(@RequestBody Type newEmployee, @PathVariable Long id) {
 
         return repository.findById(id)
                 .map(employee -> {
                     employee.setName(newEmployee.getName());
-                    employee.setRole(newEmployee.getRole());
+                    employee.setType(newEmployee.getType());
                     return repository.save(employee);
                 })
                 .orElseGet(() -> repository.save(newEmployee));
